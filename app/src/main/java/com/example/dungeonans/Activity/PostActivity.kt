@@ -1,11 +1,14 @@
 package com.example.dungeonans.Activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,11 +21,14 @@ import retrofit2.http.Body
 class PostActivity : AppCompatActivity() {
     var commentdata : MutableList<PostCommentData> = mutableListOf()
     var answerData : MutableList<PostCommentData> = mutableListOf()
+    private var doubleBackToExitPressedOnce = false
+
+    lateinit var commentEditText: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ask_post_fragment)
 
-        var commentEditText : EditText = findViewById(R.id.commentEditText)
+        commentEditText = findViewById(R.id.commentEditText)
         commentEditText.setOnClickListener{
             commentEditText.requestFocus()
         }
@@ -132,5 +138,20 @@ class PostActivity : AppCompatActivity() {
         var listData = PostCommentData(commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody)
         answerData.add(listData)
         return answerData
+    }
+
+//
+
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+        this.doubleBackToExitPressedOnce = true
+        commentEditText.hint = "댓글을 입력하세요"
+        commentEditText.clearFocus()
+        var manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        manager.hideSoftInputFromWindow(commentEditText.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 }
