@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="40dp"
@@ -154,103 +154,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView17" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/lightGrey" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/postCommentRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"/>
+                android:layout_height="wrap_content"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_marginTop="-1.5dp"
                 android:background="@color/lightGrey" />
-
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-1.5dp"
-                android:background="@drawable/top_bottom_stroke"
-                android:paddingBottom="10dp">
-
-                <ImageView
-                    android:id="@+id/imageView22"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/profile_base_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="김용준"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView22"
-                    app:layout_constraintStart_toEndOf="@+id/imageView22" />
-
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="(@kimyj)"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                    app:layout_constraintStart_toEndOf="@+id/textView23" />
-
-                <Button
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="채택하기"
-                    android:textSize="10sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@color/gray"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="03/31 12:35"
-                        android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/postAnswerRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:nestedScrollingEnabled="false"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/button"

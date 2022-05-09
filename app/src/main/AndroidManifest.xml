@@ -29,7 +29,8 @@
 
         <activity android:name=".Activity.SearchResultActivity"/>
 
-        <activity android:name=".Activity.PostActivity"/>
+        <activity android:name=".Activity.PostActivity"
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".Activity.FindAccountActivity"/>
     </application>

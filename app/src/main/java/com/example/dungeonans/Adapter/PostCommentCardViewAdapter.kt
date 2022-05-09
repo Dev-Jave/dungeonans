@@ -1,5 +1,6 @@
 package com.example.dungeonans.Adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,5 +41,4 @@ class PostCommentCardViewAdapter : RecyclerView.Adapter<PostCommentHolder>(){
     }
     // (4) setItemClickListener로 설정한 함수 실행
     private lateinit var itemClickListener : OnItemClickListener
-
 }

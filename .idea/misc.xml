@@ -119,7 +119,7 @@
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/ask_default_fragment.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/ask_head_fragment.xml" value="0.27157561361836896" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/ask_post_cardview.xml" value="0.2975630611372381" />
-        <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/ask_post_fragment.xml" value="0.6195773081201335" />
+        <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/ask_post_fragment.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/askpage_fragment.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/askpage_head_fragment.xml" value="0.22" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/askpage_headfragment.xml" value="0.15220179563916203" />
@@ -131,6 +131,7 @@
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/cardview.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/comment_cardview.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/communitypage_fragment.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/empty_activity_layout.xml" value="0.3625" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/empty_layout.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/findaccount_dialog_layout.xml" value="0.30570652173913043" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/findid_fragment_layout.xml" value="0.3625" />
@@ -148,7 +149,7 @@
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/noticepage_activity.xml" value="0.22" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/other_profile_activity.xml" value="0.22" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/post_cardview.xml" value="0.6" />
-        <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/post_comment_cardview.xml" value="0.7041719342604298" />
+        <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/post_comment_cardview.xml" value="0.6842105263157895" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/profile_allmyblog_fragment.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/profile_allmycomment_fragment.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/dydwn/Desktop/stageus_dungeonans_mypart-master/app/src/main/res/layout/profile_allmypost_fragment.xml" value="0.3625" />
