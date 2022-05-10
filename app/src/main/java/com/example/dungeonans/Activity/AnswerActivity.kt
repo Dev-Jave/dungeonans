@@ -7,7 +7,10 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,12 +25,9 @@ import com.example.dungeonans.R
 
 // 답변은 답변만 보여주고, 답변의 점점점을 누르면 답변 밑에 달린 모든 댓글들 다 볼 수 있게 처리,,
 
-class PostActivity : AppCompatActivity() {
+class AnswerActivity : AppCompatActivity() {
     var commentData : MutableList<PostCommentData> = mutableListOf()
-    var answerData : MutableList<AnswerData> = mutableListOf()
-
     private var doubleBackToExitPressedOnce = false
-
     // 리사이클러뷰 포지션 초기화
     var setRecyclerView = 0
     var commentPosition = 0
@@ -39,13 +39,14 @@ class PostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ask_post_fragment)
+        setContentView(R.layout.answer_fragment)
 
         commentEditText = findViewById(R.id.commentEditText)
         commentEditText.setOnClickListener{
             commentEditText.requestFocus()
         }
 
+        // edittext 옆 버튼 이벤트 리스너
         var writeCommentBtn : ImageButton = findViewById(R.id.writeCommentBtn)
         writeCommentBtn.setOnClickListener {
             var bodyValue = commentEditText.text.toString()
@@ -58,52 +59,15 @@ class PostActivity : AppCompatActivity() {
             commentEditText.hint = "댓글을 입력하세요"
         }
 
-        var answerBtn : Button = findViewById(R.id.answerBtn)
-        answerBtn.setOnClickListener{
-            commentEditText.hint = "답변을 입력하세요"
-            commentEditText.requestFocus()
-            var manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
-
-            setRecyclerView = 1
+        var backBtn : ImageView = findViewById(R.id.backBtn)
+        backBtn.setOnClickListener{
+            finish()
         }
-
         renderCommentUi(commentEditText)
-        renderAnswerUi()
     }
 
-    private fun renderAnswerUi() {
-        recyclerView = findViewById(R.id.postAnswerRecyclerView)
-        var data : MutableList<AnswerData> = setAnswerData()
-        var adapter = PostAnswerCardViewAdapter()
-        adapter.setItemClickListener(object : PostAnswerCardViewAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int) {
-                var intent = Intent(this@PostActivity,AnswerActivity::class.java)
-                startActivity(intent)
-            }
-        })
-
-        adapter.listData = data
-        recyclerView.adapter = adapter
-        LinearLayoutManager(this).also { recyclerView.layoutManager = it }
-
-    }
-
-    private fun setAnswerData() : MutableList<AnswerData> {
-        for (index in 0 until 2) {
-            var commentWriteProfile = R.drawable.profile_base_icon
-            var commentWriterName = "${index}번째 작성자"
-            var commentWriterNickname = "(@yongkingg)"
-            var commentWriteTime = "03/21 12:45"
-            var commentBody = "안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요"
-            var listData = AnswerData(commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody)
-            answerData.add(listData)
-        }
-        return answerData
-    }
     private fun renderCommentUi(commentEditText : EditText) {
-        recyclerView = findViewById(R.id.postCommentRecyclerView)
-
+        recyclerView = findViewById(R.id.answerPageRecyclerView)
         var data : MutableList<PostCommentData> = setCommentData()
         var adapter = PostCommentCardViewAdapter()
         adapter.setItemClickListener(object : PostCommentCardViewAdapter.OnItemClickListener {
@@ -115,7 +79,6 @@ class PostActivity : AppCompatActivity() {
                 var manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
             }
-
             override fun likeClick(v: View, position: Int) {
             }
         })
@@ -127,10 +90,10 @@ class PostActivity : AppCompatActivity() {
     }
 
     private fun putComment(body: String, commentEditText : EditText) {
-        recyclerView = findViewById(R.id.postCommentRecyclerView)
-
+        recyclerView = findViewById(R.id.answerPageRecyclerView)
         var data : MutableList<PostCommentData> = putCommentValue(body,commentPosition)
         var adapter = PostCommentCardViewAdapter()
+
         adapter.setItemClickListener(object : PostCommentCardViewAdapter.OnItemClickListener {
             override fun commentClick(v: View, position: Int) {
                 commentPosition = position

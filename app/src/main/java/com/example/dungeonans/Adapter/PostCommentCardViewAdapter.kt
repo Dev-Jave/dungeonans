@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dungeonans.DataClass.PostCommentData
 import com.example.dungeonans.Holder.PostCommentHolder
 import com.example.dungeonans.R
+import org.w3c.dom.Text
 
 class PostCommentCardViewAdapter : RecyclerView.Adapter<PostCommentHolder>(){
     var listData = mutableListOf<PostCommentData>()
@@ -23,8 +25,13 @@ class PostCommentCardViewAdapter : RecyclerView.Adapter<PostCommentHolder>(){
     }
 
     override fun onBindViewHolder(holder: PostCommentHolder, position: Int) {
+
         holder.itemView.findViewById<ImageView>(R.id.replyCommentBtn).setOnClickListener{
-            itemClickListener.onClick(it,position)
+            itemClickListener.commentClick(it,position)
+        }
+        holder.itemView.findViewById<ImageView>(R.id.commentThumbsUp).setOnClickListener{
+            itemClickListener.likeClick(it,position)
+            holder.itemView.findViewById<TextView>(R.id.likeCount).text = (Integer.parseInt(holder.itemView.findViewById<TextView>(R.id.likeCount).text.toString()) + 1).toString()
         }
 
         val data = listData[position]
@@ -33,7 +40,8 @@ class PostCommentCardViewAdapter : RecyclerView.Adapter<PostCommentHolder>(){
 
     // (2) 리스너 인터페이스
     interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
+        fun commentClick(v: View, position: Int)
+        fun likeClick(v: View,position: Int)
     }
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
