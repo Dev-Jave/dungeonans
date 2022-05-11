@@ -18,6 +18,8 @@ import com.example.dungeonans.Adapter.PostAnswerCardViewAdapter
 import com.example.dungeonans.Adapter.PostCommentCardViewAdapter
 import com.example.dungeonans.DataClass.AnswerData
 import com.example.dungeonans.DataClass.PostCommentData
+import com.example.dungeonans.DataClass.comment_type1
+import com.example.dungeonans.DataClass.comment_type2
 //import com.example.dungeonans.Fragment.PostFragment
 import com.example.dungeonans.R
 
@@ -91,24 +93,47 @@ class AnswerActivity : AppCompatActivity() {
 
     private fun putComment(body: String, commentEditText : EditText) {
         recyclerView = findViewById(R.id.answerPageRecyclerView)
-        var data : MutableList<PostCommentData> = putCommentValue(body,commentPosition)
-        var adapter = PostCommentCardViewAdapter()
+        // 대댓글
+        if (recyclerView.adapter!!.itemCount != commentPosition) {
+            var data : MutableList<PostCommentData> = putCommentValue(comment_type2,body,commentPosition)
+            var adapter = PostCommentCardViewAdapter()
 
-        adapter.setItemClickListener(object : PostCommentCardViewAdapter.OnItemClickListener {
-            override fun commentClick(v: View, position: Int) {
-                commentPosition = position
-                setRecyclerView = 0
-                commentEditText.requestFocus()
-                commentEditText.hint = "대댓글을 작성해보세요"
-                var manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
-            }
-            override fun likeClick(v: View, position: Int) {
-            }
-        })
-        adapter.listData = data
-        adapter.notifyItemInserted(commentPosition)
-        recyclerView.adapter = adapter
+            adapter.setItemClickListener(object : PostCommentCardViewAdapter.OnItemClickListener {
+                override fun commentClick(v: View, position: Int) {
+                    commentPosition = position
+                    setRecyclerView = 0
+                    commentEditText.requestFocus()
+                    commentEditText.hint = "대댓글을 작성해보세요"
+                    var manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
+                }
+                override fun likeClick(v: View, position: Int) {
+                }
+            })
+            adapter.listData = data
+            adapter.notifyItemInserted(commentPosition)
+            recyclerView.adapter = adapter
+        // 댓글
+        } else {
+            var data : MutableList<PostCommentData> = putCommentValue(comment_type1,body,commentPosition)
+            var adapter = PostCommentCardViewAdapter()
+
+            adapter.setItemClickListener(object : PostCommentCardViewAdapter.OnItemClickListener {
+                override fun commentClick(v: View, position: Int) {
+                    commentPosition = position
+                    setRecyclerView = 0
+                    commentEditText.requestFocus()
+                    commentEditText.hint = "대댓글을 작성해보세요"
+                    var manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
+                }
+                override fun likeClick(v: View, position: Int) {
+                }
+            })
+            adapter.listData = data
+            adapter.notifyItemInserted(commentPosition)
+            recyclerView.adapter = adapter
+        }
     }
 
     private fun setCommentData() : MutableList<PostCommentData> {
@@ -119,20 +144,21 @@ class AnswerActivity : AppCompatActivity() {
             var commentWriteTime = "03/21 12:45"
             var commentBody = "안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요"
             var like = 0
-            var listData = PostCommentData(commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody,like)
+            var listData = PostCommentData(comment_type1,commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody,like)
             commentData.add(listData)
         }
         return commentData
     }
 
-    private fun putCommentValue(body: String, position : Int) : MutableList<PostCommentData> {
+    private fun putCommentValue(type : Int, body: String, position : Int) : MutableList<PostCommentData> {
         var commentWriteProfile = R.drawable.profile_base_icon
         var commentWriterName = "번째 작성자"
         var commentWriterNickname = "(@yongkingg)"
         var commentWriteTime = "03/21 12:45"
         var commentBody = body
         var like = 0
-        var listData = PostCommentData(commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody,like)
+        Log.d("value",type.toString())
+        var listData = PostCommentData(type,commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody,like)
 
         try {
             commentData.add(position+1,listData)

@@ -4,10 +4,12 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.example.dungeonans.App
+import com.example.dungeonans.BuildConfig
 import com.example.dungeonans.Utils.API
 import com.example.dungeonans.Utils.Constants.TAG
 import com.example.dungeonans.Utils.isJsonArray
 import com.example.dungeonans.Utils.isJsonObject
+import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -120,5 +122,15 @@ object RetrofitClient {
         return retrofitClient
     }
 
-
+    fun initClient() : Retrofit {
+        val url = BuildConfig.SERVER_URL //서버 주소
+        val gson = Gson()                   // 서버와 주고 받을 데이터 형식
+        val clientBuilder = OkHttpClient.Builder().build()
+        val connection = Retrofit.Builder()
+            .baseUrl(url)
+            .client(clientBuilder)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        return connection
+    }
 }
