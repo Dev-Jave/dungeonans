@@ -87,6 +87,11 @@ class PostActivity : AppCompatActivity() {
                 var intent = Intent(this@PostActivity,AnswerActivity::class.java)
                 startActivity(intent)
             }
+
+            override fun profileClick(v: View, position: Int) {
+                var intent = Intent(this@PostActivity,UserProfileActivity::class.java)
+                startActivity(intent)
+            }
         })
 
         adapter.listData = data
@@ -123,6 +128,10 @@ class PostActivity : AppCompatActivity() {
 
             override fun likeClick(v: View, position: Int) {
             }
+            override fun profileClick(v: View, position: Int) {
+                var intent = Intent(this@PostActivity,UserProfileActivity::class.java)
+                startActivity(intent)
+            }
         })
         adapter.listData = data
         recyclerView.adapter = adapter
@@ -148,6 +157,11 @@ class PostActivity : AppCompatActivity() {
                 }
                 override fun likeClick(v: View, position: Int) {
                 }
+
+                override fun profileClick(v: View, position: Int) {
+                    var intent = Intent(this@PostActivity,UserProfileActivity::class.java)
+                    startActivity(intent)
+                }
             })
             adapter.listData = data
             adapter.notifyItemInserted(commentPosition)
@@ -167,6 +181,10 @@ class PostActivity : AppCompatActivity() {
                     manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
                 }
                 override fun likeClick(v: View, position: Int) {
+                }
+                override fun profileClick(v: View, position: Int) {
+                    var intent = Intent(this@PostActivity,UserProfileActivity::class.java)
+                    startActivity(intent)
                 }
             })
             adapter.listData = data
@@ -196,7 +214,6 @@ class PostActivity : AppCompatActivity() {
         var commentWriteTime = "03/21 12:45"
         var commentBody = body
         var like = 0
-        Log.d("value",type.toString())
         var listData = PostCommentData(type,commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody,like)
 
         try {

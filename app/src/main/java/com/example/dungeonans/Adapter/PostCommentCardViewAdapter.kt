@@ -1,40 +1,30 @@
 package com.example.dungeonans.Adapter
 
-import android.util.Log
+import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.marginStart
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dungeonans.Activity.UserProfileActivity
 import com.example.dungeonans.DataClass.PostCommentData
 import com.example.dungeonans.DataClass.comment_type1
-import com.example.dungeonans.Holder.PostCommentHolder
 import com.example.dungeonans.R
-import org.w3c.dom.Text
 
 class PostCommentCardViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var listData = mutableListOf<PostCommentData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
-        Log.d("timing","$listData")
         val view : View?
         return when(viewType) {
             comment_type1 -> {
-                view = LayoutInflater.from(parent.context).inflate(
-                    R.layout.post_comment_cardview,
-                    parent,
-                    false
-                )
+                view = LayoutInflater.from(parent.context).inflate(R.layout.post_comment_cardview, parent,false)
                 CommentHolder(view)
             }
             else -> {
-                view = LayoutInflater.from(parent.context).inflate(
-                    R.layout.recomment_cardview,
-                    parent,
-                    false
-                )
+                view = LayoutInflater.from(parent.context).inflate(R.layout.recomment_cardview, parent,false)
                 ReCommentHolder(view)
             }
         }
@@ -48,7 +38,6 @@ class PostCommentCardViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(listData[position].type) {
             comment_type1 -> {
-                Log.d("tag","${listData[position].type}")
                 holder.itemView.findViewById<ImageView>(R.id.replyCommentBtn).setOnClickListener{
                 itemClickListener.commentClick(it,position)
             }
@@ -56,16 +45,18 @@ class PostCommentCardViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 itemClickListener.likeClick(it,position)
                 holder.itemView.findViewById<TextView>(R.id.likeCount).text = (Integer.parseInt(holder.itemView.findViewById<TextView>(R.id.likeCount).text.toString()) + 1).toString()
             }
+            holder.itemView.findViewById<ImageView>(R.id.commentWriterProfile).setOnClickListener{
+                itemClickListener.profileClick(it,position)
+            }
 
             val data = listData[position]
             (holder as CommentHolder).setValue(data)
             }
 
             else -> {
-                Log.d("tag","${listData[position].type}")
                 holder.itemView.findViewById<ImageView>(R.id.reCommentThumbsUp).setOnClickListener{
                     itemClickListener.likeClick(it,position)
-                    holder.itemView.findViewById<TextView>(R.id.likeCount).text = (Integer.parseInt(holder.itemView.findViewById<TextView>(R.id.likeCount).text.toString()) + 1).toString()
+                    holder.itemView.findViewById<TextView>(R.id.reLikeCount).text = (Integer.parseInt(holder.itemView.findViewById<TextView>(R.id.reLikeCount).text.toString()) + 1).toString()
                 }
                 val data = listData[position]
                 (holder as ReCommentHolder).setValue(data)
@@ -107,6 +98,7 @@ class PostCommentCardViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
     interface OnItemClickListener {
         fun commentClick(v: View, position: Int)
         fun likeClick(v: View,position: Int)
+        fun profileClick(v: View,position: Int)
     }
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {

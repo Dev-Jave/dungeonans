@@ -7,20 +7,16 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dungeonans.Adapter.PostAnswerCardViewAdapter
 import com.example.dungeonans.Adapter.PostCommentCardViewAdapter
-import com.example.dungeonans.DataClass.AnswerData
 import com.example.dungeonans.DataClass.PostCommentData
 import com.example.dungeonans.DataClass.comment_type1
 import com.example.dungeonans.DataClass.comment_type2
-//import com.example.dungeonans.Fragment.PostFragment
 import com.example.dungeonans.R
 
 
@@ -65,6 +61,12 @@ class AnswerActivity : AppCompatActivity() {
         backBtn.setOnClickListener{
             finish()
         }
+
+        var answerWriterProfileImage : ImageView = findViewById(R.id.answerWriterProfileImage)
+        answerWriterProfileImage.setOnClickListener{
+            var intent = Intent(this,UserProfileActivity::class.java)
+            startActivity(intent)
+        }
         renderCommentUi(commentEditText)
     }
 
@@ -82,6 +84,10 @@ class AnswerActivity : AppCompatActivity() {
                 manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
             }
             override fun likeClick(v: View, position: Int) {
+            }
+            override fun profileClick(v: View, position: Int) {
+                var intent = Intent(this@AnswerActivity,UserProfileActivity::class.java)
+                startActivity(intent)
             }
         })
         adapter.listData = data
@@ -109,6 +115,10 @@ class AnswerActivity : AppCompatActivity() {
                 }
                 override fun likeClick(v: View, position: Int) {
                 }
+                override fun profileClick(v: View, position: Int) {
+                    var intent = Intent(this@AnswerActivity,UserProfileActivity::class.java)
+                    startActivity(intent)
+                }
             })
             adapter.listData = data
             adapter.notifyItemInserted(commentPosition)
@@ -128,6 +138,10 @@ class AnswerActivity : AppCompatActivity() {
                     manager.showSoftInput(commentEditText, InputMethodManager.SHOW_IMPLICIT)
                 }
                 override fun likeClick(v: View, position: Int) {
+                }
+                override fun profileClick(v: View, position: Int) {
+                    var intent = Intent(this@AnswerActivity,UserProfileActivity::class.java)
+                    startActivity(intent)
                 }
             })
             adapter.listData = data
@@ -157,7 +171,6 @@ class AnswerActivity : AppCompatActivity() {
         var commentWriteTime = "03/21 12:45"
         var commentBody = body
         var like = 0
-        Log.d("value",type.toString())
         var listData = PostCommentData(type,commentWriteProfile,commentWriterName,commentWriterNickname,commentWriteTime,commentBody,like)
 
         try {

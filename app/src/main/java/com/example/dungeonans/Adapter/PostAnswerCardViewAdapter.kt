@@ -24,6 +24,9 @@ class PostAnswerCardViewAdapter : RecyclerView.Adapter<AnswerHolder>() {
         holder.itemView.findViewById<ImageView>(R.id.answerReplyCommentBtn).setOnClickListener{
             itemClickListener.onClick(it,position)
         }
+        holder.itemView.findViewById<ImageView>(R.id.answerWriterProfileImage).setOnClickListener{
+            itemClickListener.profileClick(it,position)
+        }
 
         val data = listData[position]
         holder.setValue(data)
@@ -31,6 +34,7 @@ class PostAnswerCardViewAdapter : RecyclerView.Adapter<AnswerHolder>() {
 
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
+        fun profileClick(v: View,position: Int)
     }
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: PostAnswerCardViewAdapter.OnItemClickListener) {

@@ -35,6 +35,8 @@
         <activity android:name=".Activity.FindAccountActivity"/>
 
         <activity android:name=".Activity.AnswerActivity"/>
+        <activity android:name=".Activity.UserProfileActivity"/>
+
 
     </application>
 </manifest>

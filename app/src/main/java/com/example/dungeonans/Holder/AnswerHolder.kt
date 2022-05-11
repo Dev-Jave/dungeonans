@@ -12,7 +12,6 @@ class AnswerHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var writerProfileImage = itemView?.findViewById<ImageView>(R.id.answerWriterProfileImage)
     var writerName = itemView?.findViewById<TextView>(R.id.answerWriterName)
     var writerNickName = itemView?.findViewById<TextView>(R.id.answerWriterNickName)
-    var acceptBtn = itemView?.findViewById<Button>(R.id.acceptBtn)
     var postTime = itemView?.findViewById<TextView>(R.id.answerPostTime)
 
     fun setValue(listData : AnswerData) {

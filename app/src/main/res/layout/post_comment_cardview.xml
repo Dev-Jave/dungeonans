@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="0"
-            android:textColor="@color/hashtagRed"
+            android:textColor="@color/neoBlue"
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/commentWriteTime"
             app:layout_constraintStart_toEndOf="@+id/commentWriteTime" />
