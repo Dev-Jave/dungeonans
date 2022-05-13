@@ -34,10 +34,10 @@ class BlogCardViewAdapter : RecyclerView.Adapter<BlogHolder>() { // RecyclerView
     }
 
     override fun onBindViewHolder(holder: BlogHolder, position: Int) {
-        // 클릭 이벤트 처리
-        holder.itemView.findViewById<ImageView>(R.id.replyCommentBtn).setOnClickListener{
-            itemClickListener.onClick(it,position)
-        }
+//        // 클릭 이벤트 처리
+//        holder.itemView.findViewById<ImageView>(R.id.replyCommentBtn).setOnClickListener{
+//            itemClickListener.onClick(it,position)
+//        }
 
         val data = listData[position]
         holder.setBlogPostValue(data)

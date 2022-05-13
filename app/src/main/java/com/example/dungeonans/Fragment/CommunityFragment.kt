@@ -13,10 +13,14 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dungeonans.Activity.MainActivity
 import com.example.dungeonans.Adapter.CommunityCardViewAdapter
-import com.example.dungeonans.DataClass.CommunityData
+import com.example.dungeonans.DataClass.*
 import com.example.dungeonans.R
+import com.example.dungeonans.Retrofit.RetrofitClient
 import com.example.dungeonans.Space.LinearSpacingItemDecoration
+import retrofit2.Call
+import retrofit2.Response
 
 class CommunityFragment : Fragment() {
     var selectedBtn : Int? = null
@@ -30,6 +34,20 @@ class CommunityFragment : Fragment() {
     }
 
     private fun setHashTag(view:View) {
+        var retrofit = RetrofitClient.initClient()
+        var languageTag = language_tag(false,false,false,false,false,false,false,false,false,false)
+        var data = board_req_format(1,6,0,languageTag)
+        var getTagApi = retrofit.create(RetrofitClient.GetCommunityPostAPI::class.java)
+        getTagApi.sendBoardReq(data).enqueue(object : retrofit2.Callback<CommunityPostData>{
+            override fun onFailure(call: Call<CommunityPostData>, t: Throwable) {
+                Log.d("tag",t.toString())
+            }
+            override fun onResponse(call: Call<CommunityPostData>, response: Response<CommunityPostData>) {
+                Log.d("tag",response.body()!!.success.toString())
+                Log.d("tag",response.body()!!.board_tag_list.toString())
+                Log.d("tag",response.body()!!.toString())
+            }
+        })
         var radioGroup : RadioGroup = view.findViewById(R.id.radioGroup)
         var radioButtonText = resources.getStringArray(R.array.hashtaglist)
 
@@ -65,7 +83,6 @@ class CommunityFragment : Fragment() {
             }
             when(checkedId) {
                 checkedId ->  {
-                    Log.d("Tag","?")
                     var checkedBtn = view.findViewById<RadioButton>(checkedId)
                     checkedBtn.setTextColor(resources.getColor(R.color.white,null))
                 }
@@ -77,6 +94,12 @@ class CommunityFragment : Fragment() {
         var recyclerView : RecyclerView = view.findViewById(R.id.communityPageRecyclerView)
         var data : MutableList<CommunityData> = setData()
         var adapter = CommunityCardViewAdapter()
+        adapter.setItemClickListener(object : CommunityCardViewAdapter.OnItemClickListener {
+            override fun postClick(v: View, position: Int) {
+                var mainActivity = context as MainActivity
+                mainActivity.showPost()
+            }
+        })
         adapter.listData = data
         recyclerView.adapter = adapter
         LinearLayoutManager(context).also { recyclerView.layoutManager = it }
@@ -107,5 +130,7 @@ class CommunityFragment : Fragment() {
             }
         })
     }
+
+
 }
 

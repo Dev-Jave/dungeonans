@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.dungeonans.App
 import com.example.dungeonans.BuildConfig
+import com.example.dungeonans.DataClass.*
 import com.example.dungeonans.Utils.API
 import com.example.dungeonans.Utils.Constants.TAG
 import com.example.dungeonans.Utils.isJsonArray
@@ -15,19 +16,18 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 import java.util.logging.Handler
 
 // 싱글턴
 object RetrofitClient {
     // 레트로핏 클라이언트 선언
-
     private var retrofitClient: Retrofit? = null
 //    private lateinit var retrofitClient: Retrofit
-
-
     // 레트로핏 클라이언트 가져오기
     fun getClient(baseUrl: String): Retrofit? {
         Log.d(TAG, "RetrofitClient - getClient() called")
@@ -132,5 +132,45 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         return connection
+    }
+
+    interface GetSpecificPostApi{
+        @GET("/board")
+        fun getPost(@Query("posting_index") posting_index : Int) : Call<ClickedPostData>
+    }
+
+    interface GetCommunityPostAPI{
+        @POST("/board/community")
+        fun sendBoardReq(@Body() board_req_format : board_req_format) : Call<CommunityPostData>
+    }
+
+    interface GetQnAPostApi{
+        @POST("/board/qna")
+        fun sendBoardReq(@Body() board_req_format: board_req_format) : Call<QnAPostData>
+    }
+
+    interface GetBlogApi{
+        @POST("/board/blog")
+        fun sendBoardReq(@Body() board_req_format: board_req_format) : Call<BlogPostData>
+    }
+
+    interface GetCommunityByTagApi{
+        @POST("/board/commTag")
+        fun getPost(@Body() board_req_format: board_req_format) : Call<GetCommunityPostByTag>
+    }
+
+//    interface GetCommentApi{
+//        @GET("/comment")
+//        fun getComment(@Query("posting_index") posting_index: Int) : Call
+//    }
+
+    interface PostCommentApi{
+        @POST("/comment")
+        fun postComment(@Query("comment_format_req") comment_format_req : comment_format_req) : Call<NoneData>
+    }
+
+    interface DeleteCommentApi{
+        @DELETE("/comment")
+        fun deleteComment(@Path("comment_index") comment_index : Int) : Call<NoneData>
     }
 }

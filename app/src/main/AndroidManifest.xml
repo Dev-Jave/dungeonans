@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dungeonans">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -9,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_dungeonans_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Dungeonans.Material">
 
         <activity
@@ -35,8 +38,13 @@
         <activity android:name=".Activity.FindAccountActivity"/>
 
         <activity android:name=".Activity.AnswerActivity"/>
+        <activity android:name=".Activity.MainActivity"/>
+
         <activity android:name=".Activity.UserProfileActivity"/>
 
-
+        <meta-data
+            android:name="com.example.dungeonans.maps.v2.server.url"
+            android:value="app.BuildConfig.SERVER_URL"/>
     </application>
+
 </manifest>

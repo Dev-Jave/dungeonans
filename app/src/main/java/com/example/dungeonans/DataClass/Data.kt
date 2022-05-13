@@ -1,5 +1,7 @@
 package com.example.dungeonans.DataClass
 
+import com.google.gson.annotations.SerializedName
+
 data class BlogData(var cardViewTitle : String, var cardViewBody : String, var cardViewWriter : String, var cardViewProfile : Int)
 data class CommunityData(var postTitle : String, var postBody : String, var hashtag : String, var likeCount : String, var commentCount : String)
 data class CommentData(var commentBody : String)
