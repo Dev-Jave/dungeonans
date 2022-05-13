@@ -35,17 +35,20 @@ class CommunityFragment : Fragment() {
 
     private fun setHashTag(view:View) {
         var retrofit = RetrofitClient.initClient()
+
         var languageTag = language_tag(false,false,false,false,false,false,false,false,false,false)
-        var data = board_req_format(1,6,0,languageTag)
+        var data = board_req_format(0,4,0,languageTag)
+        Log.d("hashtag",data.toString())
+
         var getTagApi = retrofit.create(RetrofitClient.GetCommunityPostAPI::class.java)
+
         getTagApi.sendBoardReq(data).enqueue(object : retrofit2.Callback<CommunityPostData>{
             override fun onFailure(call: Call<CommunityPostData>, t: Throwable) {
-                Log.d("tag",t.toString())
+                Log.d("hashtag",t.toString())
             }
             override fun onResponse(call: Call<CommunityPostData>, response: Response<CommunityPostData>) {
-                Log.d("tag",response.body()!!.success.toString())
-                Log.d("tag",response.body()!!.board_tag_list.toString())
-                Log.d("tag",response.body()!!.toString())
+                Log.d("hashtag",response.body()!!.success.toString())
+                Log.d("hashtag",response.body()!!.toString())
             }
         })
         var radioGroup : RadioGroup = view.findViewById(R.id.radioGroup)

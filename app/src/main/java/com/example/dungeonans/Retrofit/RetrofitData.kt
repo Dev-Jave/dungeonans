@@ -10,7 +10,7 @@ data class NoneData(
 data class ClickedPostData(
     @SerializedName("success") var success : Boolean,
     @SerializedName("errmsg") var errmsg : String,
-    @SerializedName("posting") var posting: posting_format_res
+    @SerializedName("posting") var posting: List<posting_format_res>
 )
 
 data class board_req_format(
@@ -26,6 +26,12 @@ data class CommunityPostData(
     var posting_list : List<posting_format_res>,
     var end_index : Int,
     var board_tag_list : List<TagTextData>
+)
+
+data class Comment(
+    var success: Boolean,
+    var errmsg: String,
+    var comment_list : List<comment_format_res>
 )
 
 data class QnAPostData(
@@ -58,7 +64,7 @@ data class posting_format_res(
     var date : String,
     var like_num : Int,
     var comment_num : Int,
-    var board_tag : Int,
+    var board_tag : Int
 )
 
 data class TagTextData(
@@ -84,3 +90,32 @@ data class comment_format_req(
     var content : String,
     var nested_comment_index : Int
 )
+
+data class comment_format_res(
+    var board_index: Int,
+    var posting_index: Int,
+    var comment_index:Int,
+    var name : String,
+    var nickname: String,
+    var content: String,
+    var like_num: Int,
+    var nested_comment_index: Int // 대댓글 갯수
+)
+
+data class put_comment_req(
+    var posting_index: String,
+    var content : String
+)
+
+
+data class LoginData(
+    val id: String,
+    val pw : String
+)
+
+data class LoginResponse(
+    val errmsg: String,
+    val success : Boolean,
+    val token : String
+)
+

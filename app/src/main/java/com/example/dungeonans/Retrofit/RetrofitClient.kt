@@ -126,6 +126,7 @@ object RetrofitClient {
         val url = BuildConfig.SERVER_URL //서버 주소
         val gson = Gson()                   // 서버와 주고 받을 데이터 형식
         val clientBuilder = OkHttpClient.Builder().build()
+
         val connection = Retrofit.Builder()
             .baseUrl(url)
             .client(clientBuilder)
@@ -159,18 +160,26 @@ object RetrofitClient {
         fun getPost(@Body() board_req_format: board_req_format) : Call<GetCommunityPostByTag>
     }
 
-//    interface GetCommentApi{
-//        @GET("/comment")
-//        fun getComment(@Query("posting_index") posting_index: Int) : Call
-//    }
+    interface GetCommentApi{
+        @GET("/comment")
+        fun getComment(@Query("posting_index") posting_index: Int) : Call<Comment>
+    }
 
     interface PostCommentApi{
         @POST("/comment")
-        fun postComment(@Query("comment_format_req") comment_format_req : comment_format_req) : Call<NoneData>
+        fun postComment(@Header("token") token: String?, @Body() comment_format_req : put_comment_req) : Call<NoneData>
     }
 
     interface DeleteCommentApi{
         @DELETE("/comment")
         fun deleteComment(@Path("comment_index") comment_index : Int) : Call<NoneData>
+    }
+
+    interface LoginApi {
+        @POST("/account/login")
+
+        fun postLogin(
+            @Body loginData : LoginData
+        ) :Call<LoginResponse>
     }
 }

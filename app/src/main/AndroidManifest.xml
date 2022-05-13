@@ -45,6 +45,7 @@
         <meta-data
             android:name="com.example.dungeonans.maps.v2.server.url"
             android:value="app.BuildConfig.SERVER_URL"/>
+
     </application>
 
 </manifest>

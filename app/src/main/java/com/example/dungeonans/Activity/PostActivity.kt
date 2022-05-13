@@ -18,7 +18,9 @@ import com.example.dungeonans.R
 import com.example.dungeonans.Retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.myprofilepage_fragment.*
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 
 
 // 답변은 답변만 보여주고, 답변의 점점점을 누르면 답변 밑에 달린 모든 댓글들 다 볼 수 있게 처리,,
@@ -68,19 +70,20 @@ class PostActivity : AppCompatActivity() {
                 manager.hideSoftInputFromWindow(commentEditText.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
                 commentPosition = recyclerView.adapter!!.itemCount
                 commentEditText.hint = "댓글을 입력하세요"
-            }
 
-            var retrofit = RetrofitClient.initClient()
-            var putComment = retrofit.create(RetrofitClient.PostCommentApi::class.java)
-            var commentData = comment_format_req(0,0,commentEditText.text.toString(),0)
-            putComment.postComment(commentData).enqueue(object : retrofit2.Callback<NoneData> {
-                override fun onFailure(call: Call<NoneData>, t: Throwable) {
-                    Log.d("tag","fail")
-                }
-                override fun onResponse(call: Call<NoneData>, response: Response<NoneData>) {
-                    Log.d("tag","success")
-                }
-            })
+                var retrofit = RetrofitClient.initClient()
+
+                var putComment = retrofit.create(RetrofitClient.PostCommentApi::class.java)
+                putComment.postComment("sdfsdfsdfdfsdfsdfdsf",put_comment_req("1","커피우유맛있다")).enqueue(object : retrofit2.Callback<NoneData> {
+                    override fun onFailure(call: Call<NoneData>, t: Throwable) {
+                        Log.d("tag","fail")
+                    }
+                    override fun onResponse(call: Call<NoneData>, response: Response<NoneData>) {
+                        Log.d("tag","success")
+                        Log.d("tag",response.message())
+                    }
+                })
+            }
         }
 
         var answerBtn : Button = findViewById(R.id.answerBtn)
@@ -103,6 +106,17 @@ class PostActivity : AppCompatActivity() {
     }
 
     private fun renderAnswerUi() {
+        var retrofit = RetrofitClient.initClient()
+        var getComment = retrofit.create(RetrofitClient.GetCommentApi::class.java)
+        getComment.getComment(1).enqueue(object : retrofit2.Callback<Comment> {
+            override fun onFailure(call: Call<Comment>, t: Throwable) {
+                Log.d("tag",t.toString())
+            }
+            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
+                Log.d("tag",response.body().toString())
+            }
+        })
+
         recyclerView = findViewById(R.id.postAnswerRecyclerView)
         var data : MutableList<AnswerData> = setAnswerData()
         var adapter = PostAnswerCardViewAdapter()
