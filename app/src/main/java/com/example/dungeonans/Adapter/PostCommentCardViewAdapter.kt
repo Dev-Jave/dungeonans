@@ -1,15 +1,11 @@
 package com.example.dungeonans.Adapter
 
-import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dungeonans.Activity.UserProfileActivity
-import com.example.dungeonans.DataClass.PostCommentData
 import com.example.dungeonans.DataClass.comment_type1
 import com.example.dungeonans.R
 
