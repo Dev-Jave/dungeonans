@@ -1,7 +1,6 @@
 package com.example.dungeonans.Activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dungeonans.Fragment.MyAllBlogShowFragment
 import com.example.dungeonans.Fragment.MyAllCommentShowFragment

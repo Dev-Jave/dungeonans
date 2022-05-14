@@ -3,6 +3,7 @@ package com.example.dungeonans.Retrofit
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
+import androidx.databinding.ktx.BuildConfig
 import com.example.dungeonans.App
 import com.example.dungeonans.BuildConfig
 import com.example.dungeonans.DataClass.*

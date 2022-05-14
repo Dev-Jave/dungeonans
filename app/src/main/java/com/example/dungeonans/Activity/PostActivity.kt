@@ -16,11 +16,8 @@ import com.example.dungeonans.Adapter.PostCommentCardViewAdapter
 import com.example.dungeonans.DataClass.*
 import com.example.dungeonans.R
 import com.example.dungeonans.Retrofit.RetrofitClient
-import kotlinx.android.synthetic.main.myprofilepage_fragment.*
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 
 // 답변은 답변만 보여주고, 답변의 점점점을 누르면 답변 밑에 달린 모든 댓글들 다 볼 수 있게 처리,,

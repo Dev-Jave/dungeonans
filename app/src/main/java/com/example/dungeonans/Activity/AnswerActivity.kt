@@ -18,8 +18,6 @@ import com.example.dungeonans.DataClass.comment_type1
 import com.example.dungeonans.DataClass.comment_type2
 import com.example.dungeonans.R
 
-
-
 // 답변은 답변만 보여주고, 답변의 점점점을 누르면 답변 밑에 달린 모든 댓글들 다 볼 수 있게 처리,,
 
 class AnswerActivity : AppCompatActivity() {
