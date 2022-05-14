@@ -55,7 +55,7 @@ class SearchBlogActivity: AppCompatActivity(),
         this.searchHistoryList = PrefManager.getSearchHistoryList() as ArrayList<SearchData>
 
         this.searchHistoryList.forEach {
-            Log.d("TAG", "저장된 검색 기록 ${it.term}, ${it.timestamp}")
+            Log.d("TAG", "저장된 검색 기록 ${it.term}, ${it.timeStamp}")
         }
     }
 
@@ -109,7 +109,7 @@ class SearchBlogActivity: AppCompatActivity(),
         if(!query.isNullOrEmpty()) {
             this.top_tool_bar.title = query
 
-            var newSearchData = SearchData(term = query, timestamp = Date().toString())
+            var newSearchData = SearchData(term = query, timeStamp = Date().toString())
 
             this.searchHistoryList.add(newSearchData)
 
