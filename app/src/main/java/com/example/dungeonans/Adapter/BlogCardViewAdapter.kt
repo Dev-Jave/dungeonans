@@ -16,7 +16,7 @@ import com.example.dungeonans.R
 import kotlin.properties.Delegates
 
 
-class BlogCardViewAdapter : RecyclerView.Adapter<BlogHolder>() { // RecyclerView.Adapter를 사용하기 위해 상속
+class  BlogCardViewAdapter : RecyclerView.Adapter<BlogHolder>() { // RecyclerView.Adapter를 사용하기 위해 상속
     var listData = mutableListOf<BlogData>() // 리스트 데이터를 전달받을 변수
     var width = 0
     override fun getItemCount(): Int {
