@@ -6,10 +6,9 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dungeonans.DataClass.LoginData
+import com.example.dungeonans.DataClass.LoginResponse
 import com.example.dungeonans.R
-import com.example.dungeonans.Retrofit.LoginApi
-import com.example.dungeonans.Retrofit.LoginData
-import com.example.dungeonans.Retrofit.LoginResponse
 import com.example.dungeonans.Retrofit.RetrofitClient
 import com.example.dungeonans.Utils.Constants.TAG
 import com.example.dungeonans.databinding.ActivityLoginBinding
@@ -49,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
-            loginEvent()
+            connectLoginApi()
         }
     }
 
@@ -101,8 +100,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginEvent() {
-        //connectLoginApi()
-        val loginIntent = Intent(this@LoginActivity, MainActivity::class.java) // 메인 페이지로 전환
+//        val loginIntent = Intent(this, SearchActivity::class.java) // 메인 페이지로 전환
+
+        val loginIntent = Intent(this, PostActivity::class.java)
         startActivity(loginIntent)
     }
 
@@ -154,18 +154,18 @@ class LoginActivity : AppCompatActivity() {
 
         val retrofit = RetrofitClient.initClient()
 
-        val requestLoginApi = retrofit.create(LoginApi::class.java)
+        val requestLoginApi = retrofit.create(RetrofitClient.LoginApi::class.java)
         requestLoginApi.postLogin(loginInfo).enqueue(object : Callback<LoginResponse> {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-               Log.d("TAG","$t")
+                Log.d("TAG","$t")
             }
-
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Log.d("TAG" , "response success : ${response.body()?.success}")
                 Log.d("TAG" , "errmsg : ${response.body()?.errmsg}")
                 Log.d("TAG", "id ${response.body()?.token}")
                 if (response.body()?.success == true) {
-                    val loginIntent = Intent(this@LoginActivity, UserProfileEditActivity::class.java) // 메인 페이지로 전환
+                    val loginIntent = Intent(this@LoginActivity, PostActivity::class.java) // 메인 페이지로 전환
+//                    loginIntent.putExtra("token",response.body()?.token)
                     startActivity(loginIntent)
                 }
             }

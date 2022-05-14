@@ -19,8 +19,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "SERVER_URL", properties.getProperty("server_url")
-
+        buildConfigField("String", "SERVER_URL", properties.getProperty("server.url"))
     }
 
     buildTypes {

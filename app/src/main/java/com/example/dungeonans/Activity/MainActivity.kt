@@ -3,6 +3,7 @@ package com.example.dungeonans.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,11 @@ import com.example.dungeonans.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.dungeonans.BuildConfig
+import com.example.dungeonans.DataClass.ClickedPostData
+import com.example.dungeonans.Retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     lateinit var binding: ActivityMainBinding
@@ -24,8 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_main_menu,menu)
-
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
         return true
     }
 
@@ -62,10 +67,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_search -> {
-                if (binding.pager.currentItem == 2) {
-                    val intent = Intent(this, SearchBlogActivity::class.java)
-                    startActivity(intent)
-                }
                 true
             }
             R.id.action_share -> {
@@ -109,5 +110,19 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     fun showProfile() {
         var intent = Intent(this,UserProfileActivity::class.java)
         startActivity(intent)
+    }
+
+    fun showPost() {
+        var retrofit = RetrofitClient.initClient()
+        var getCommunityPost = retrofit.create(RetrofitClient.GetSpecificPostApi::class.java)
+        getCommunityPost.getPost(1).enqueue(object : retrofit2.Callback<ClickedPostData> {
+            override fun onFailure(call: Call<ClickedPostData>, t: Throwable) {
+                Log.d("tag","!")
+                Log.d("tag",t.toString())
+            }
+            override fun onResponse(call: Call<ClickedPostData>, response: Response<ClickedPostData>) {
+                Log.d("tag","${response.body()}")
+            }
+        })
     }
 }

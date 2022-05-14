@@ -14,11 +14,4 @@
         <item>최신순</item>
         <item>인기순</item>
     </string-array>
-
-    <string-array name="social_link">
-        <item>소셜 플랫폼</item>
-        <item>인스타그램</item>
-        <item>페이스북</item>
-        <item>깃허브</item>
-    </string-array>
 </resources>

@@ -6,9 +6,8 @@
         android:title="검색"
         android:orderInCategory="100"
         android:icon="@drawable/search_btn_icon"
-        app:showAsAction="collapseActionView|always"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        />
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
     <item
         android:id="@+id/action_share"
