@@ -5,7 +5,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.databinding.ktx.BuildConfig
 import com.example.dungeonans.App
-import com.example.dungeonans.BuildConfig
 import com.example.dungeonans.DataClass.*
 import com.example.dungeonans.Utils.API
 import com.example.dungeonans.Utils.Constants.TAG
@@ -124,7 +123,7 @@ object RetrofitClient {
     }
 
     fun initClient() : Retrofit {
-        val url = BuildConfig.SERVER_URL //서버 주소
+        val url = BuildConfig.BUILD_TYPE //서버 주소
         val gson = Gson()                   // 서버와 주고 받을 데이터 형식
         val clientBuilder = OkHttpClient.Builder().build()
 
